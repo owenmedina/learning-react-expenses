@@ -12,15 +12,17 @@ interface Props {
 
 const ExpenseItem: FC<Props> = ({ date, title, amount }) => {
   return (
-    <Card className={styles["expense-item"]}>
-      <ExpenseDate date={date} />
-      <div className={styles["expense-item__description"]}>
-        <h2>{title}</h2>
-        <div className={styles["expense-item__price"]}>
-          ${amount.toFixed(2)}
+    <li>
+      <Card className={styles["expense-item"]}>
+        <ExpenseDate date={date} />
+        <div className={styles["expense-item__description"]}>
+          <h2>{title}</h2>
+          <div className={styles["expense-item__price"]}>
+            ${amount.toFixed(2)}
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </li>
   );
 };
 

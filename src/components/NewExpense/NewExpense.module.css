@@ -26,6 +26,11 @@
   border-color: #510674;
 }
 
+.new-expense button:disabled {
+  background-color: #888;
+  border-color: #888;
+}
+
 .new-expense button.alternative {
   color: #220131;
   border-color: transparent;
@@ -35,4 +40,8 @@
 .new-expense button.alternative:hover,
 .new-expense button.alternative:active {
   background-color: #ddb3f8;
+}
+
+.new-expense button.alternative:disabled {
+  background-color: #bbb;
 }

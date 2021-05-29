@@ -4,6 +4,8 @@ import Card from "../UI/Card";
 import { Expense } from "../../models/Expense";
 import styles from "./ExpensesContainer.module.css";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 
 interface Props {
   expenses: Expense[];
@@ -23,18 +25,8 @@ const ExpensesContainer: FC<Props> = ({ expenses }) => {
     <div>
       <Card className={styles["expenses"]}>
         <ExpensesFilter onChangeYear={yearHandler} year={year} />
-        {filteredExpenses.length === 0 ? (
-          <p>No expenses for this year</p>
-        ) : (
-          filteredExpenses.map((exp) => (
-            <ExpenseItem
-              key={exp.id}
-              date={exp.date}
-              title={exp.title}
-              amount={exp.amount}
-            />
-          ))
-        )}
+        <ExpensesChart expenses={filteredExpenses} />
+        <ExpensesList expenses={filteredExpenses} />
       </Card>
     </div>
   );

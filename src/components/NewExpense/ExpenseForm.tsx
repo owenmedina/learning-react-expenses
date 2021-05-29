@@ -3,23 +3,46 @@ import { Expense } from "../../models/Expense";
 import styles from "./ExpenseForm.module.css";
 
 interface Props {
+  onCancel: React.MouseEventHandler<HTMLButtonElement>;
   onSaveExpense: (e: Expense) => void;
 }
 
-const ExpenseForm: FC<Props> = ({ onSaveExpense }) => {
+const ExpenseForm: FC<Props> = ({ onCancel, onSaveExpense }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
+  const [submitIsDisabled, setSubmitIsDisabled] = useState(true);
 
   const updateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
+    if (
+      submitIsDisabled &&
+      e.target.value !== "" &&
+      amount !== "" &&
+      date !== ""
+    )
+      setSubmitIsDisabled(false);
   };
 
   const updateAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(e.target.value);
+    if (
+      submitIsDisabled &&
+      e.target.value !== "" &&
+      title !== "" &&
+      date !== ""
+    )
+      setSubmitIsDisabled(false);
   };
   const updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDate(e.target.value);
+    if (
+      submitIsDisabled &&
+      e.target.value !== "" &&
+      title !== "" &&
+      amount !== ""
+    )
+      setSubmitIsDisabled(false);
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,7 +84,12 @@ const ExpenseForm: FC<Props> = ({ onSaveExpense }) => {
           ></input>
         </div>
         <div className={styles["new-expense__actions"]}>
-          <button type="submit">Submit</button>
+          <button type="button" onClick={onCancel}>
+            Cancel
+          </button>
+          <button type="submit" disabled={submitIsDisabled}>
+            Submit
+          </button>
         </div>
       </div>
     </form>
